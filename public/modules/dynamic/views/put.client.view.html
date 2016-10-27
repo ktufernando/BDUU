@@ -1,0 +1,52 @@
+<section data-ng-controller="DynamicController">
+	<div class="page-header">
+		<h1>Add User Dynamic Data</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="putForm" class="form-horizontal" data-ng-submit="putDynamicData(putForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="appname">App Name</label>
+					<div class="controls">
+						<input name="appname" type="text" data-ng-model="create.appName" id="appname" class="form-control" placeholder="App Name" required>
+					</div>
+					<div ng-show="putForm.appname.$invalid" class="help-block">
+						<p ng-show="putForm.appname.$error.required" class="text-danger">App Name is required</p>
+					</div>
+				</div>
+                <div class="form-group">
+                    <input type="button" value="Add Pair key-value" ng-click="addPair()" class="btn btn-default">
+                </div>
+				<div class="form-group" data-ng-repeat="data in create.pairs">
+                    <div class="col-md-6">
+                        <label class="control-label">Key</label>
+                        <div class="controls">
+                            <input type="text" name="key{{$index}}" data-ng-model="data.key" id="key{{$index}}" class="form-control" placeholder="Key" required>
+                        </div>
+                        <div ng-show="putForm.key{{$index}}.$invalid" class="help-block">
+                            <p ng-show="putForm.key{{$index}}.$error.required" class="text-danger">Key is required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">Value</label>
+                        <div class="controls">
+                            <input type="text" name="value{{$index}}" data-ng-model="data.value" id="value{{$index}}" class="form-control" placeholder="Value" required>
+                        </div>
+                        <div ng-show="putForm.value{{$index}}.$invalid" class="help-block">
+                            <p ng-show="putForm.value{{$index}}.$error.required" class="text-danger">Value is required</p>
+                        </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Create" class="btn btn-default" ng-disabled="putForm.appname.$invalid">
+				</div>
+                <div data-ng-show="success" class="text-center text-success">
+                    <strong>Dynamic Data Successfully</strong>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

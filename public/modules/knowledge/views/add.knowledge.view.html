@@ -1,0 +1,41 @@
+<section data-ng-controller="KnowledgesController">
+	<div class="page-header">
+		<h1>Add Knowledge</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="addForm" class="form-horizontal" data-ng-submit="addKnowledge(addForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="name">Knowledge Name</label>
+					<div class="controls">
+						<input name="name" type="text" data-ng-model="add.name" id="name" class="form-control" placeholder="Knowledge Name" required>
+					</div>
+					<div ng-show="addForm.name.$invalid" class="help-block">
+						<p ng-show="addForm.name.$error.required" class="text-danger">Knowledge Name is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="button" value="Add Parent Knowledge" ng-click="addParent()" class="btn btn-default">
+				</div>
+				<div class="form-group" data-ng-repeat="data in add.parents track by $index">
+					<label class="control-label" for="parent{{$index}}">Parent Knowledge Name</label>
+					<div class="controls">
+						<input type="text" name="parent{{$index}}" data-ng-model="add.parents[$index]" id="parent{{$index}}" class="form-control" placeholder="Knowledge Name" required>
+					</div>
+					<div ng-show="addForm.parent{{$index}}.$invalid" class="help-block">
+						<p ng-show="addForm.parent{{$index}}.$error.required" class="text-danger">Parent is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Send" class="btn btn-default" ng-disabled="addForm.name.$invalid">
+				</div>
+				<div data-ng-show="success" class="text-center text-success">
+					<strong>Knowledge is Added</strong>
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

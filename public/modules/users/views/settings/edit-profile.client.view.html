@@ -1,0 +1,223 @@
+<section class="row" data-ng-controller="SettingsController">
+	<h3 class="col-md-12 text-center">Edit your profile</h3>
+    <div class="col-xs-offset-1 col-xs-11 col-md-offset-1 col-md-11">
+		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
+			<fieldset>
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                        <div class="form-group">
+                            <label>Gender</label><br>
+                            <div class="btn-group">
+                                <label class="btn btn-primary" ng-model="user.personalInfo.gender" btn-radio="'MASCULINO'" uncheckable>Male</label>
+                                <label class="btn btn-primary" ng-model="user.personalInfo.gender" btn-radio="'FEMENINO'" uncheckable>Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-xs-3 col-md-offset-1 col-md-3" style="padding-right: 0px; padding-left: 0px; ">
+                        <div class="col-xs-4 col-md-4">
+                            <div class="form-group">
+                                <label for="tipodoc">Doc Type</label>
+                                <select id="tipodoc" name="tipodoc" class="form-control" data-ng-model="user.personalInfo.document.docType">
+                                    <option value="DNI">DNI</option>
+                                    <option value="CI">CI</option>
+                                    <option value="CUIL">CUIL</option>
+                                    <option value="CUIT">CUIT</option>
+                                    <option value="LC">LC</option>
+                                    <option value="LE">LE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label for="nrodoc">Doc Number</label>
+                                <input type="text" id="nrodoc" name="nrodoc" class="form-control" data-ng-model="user.personalInfo.document.docNumber" placeholder="Doc Number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-md-3" style="padding-right: 0px; padding-left: 0px; ">
+                        <div class="col-xs-3 col-md-3">
+                            <div class="form-group">
+                                <label for="day">Birth Day</label>
+                                <select id="day" name="day" class="form-control" data-ng-model="user.personalInfo.birthDate.day">
+                                    <option value="{{$index+1}}" data-ng-repeat="i in getArrayBy(31) track by $index">{{$index+1}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="form-group">
+                                <label for="month">Month</label>
+                                <select id="month" name="month" class="form-control" data-ng-model="user.personalInfo.birthDate.month">
+                                    <option value="{{$index+1}}" data-ng-repeat="i in getArrayBy(12) track by $index">{{$index+1}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <select id="year" name="year" class="form-control" data-ng-model="user.personalInfo.birthDate.year">
+                                    <option value="{{$index+1950}}" data-ng-repeat="i in getArrayBy(65) track by $index">{{$index+1950}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                        <div class="form-group">
+                            <label for="nationality">Nacionalidad</label>
+                            <select id="nationality" name="nationality" class="form-control" data-ng-model="user.personalInfo.nationality">
+                                <option value="argentina">Argentina</option>
+                                <option value="brasil">Brasil</option>
+                                <option value="chile">Chile</option>
+                                <option value="uruguay">Uruguay</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                        <div class="form-group">
+                            <label for="website">Sitio Web</label>
+                            <input type="text" id="website" name="website" class="form-control" data-ng-model="user.personalInfo.webSite" placeholder="Sitio Web">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-md-2">
+                        <div class="form-group">
+                            <label for="areaCode">Telephone Code</label>
+                            <input type="text" id="areaCode" name="areaCode" class="form-control" data-ng-model="user.personalInfo.telephones[0].areaCode" placeholder="Area Code">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-2 col-md-offset-1 col-md-2">
+                        <div class="form-group">
+                            <label for="number">Number</label>
+                            <input type="text" id="number" name="number" class="form-control" data-ng-model="user.personalInfo.telephones[0].number" placeholder="Number">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-2 col-md-offset-1 col-md-2">
+                        <div class="form-group">
+                            <label for="telCompany">Company</label>
+                            <select id="telCompany" name="telCompany" class="form-control" data-ng-model="user.personalInfo.telephones[0].telCompany">
+                                <option value="CLARO">Claro</option>
+                                <option value="MOVISTAR">Movistar</option>
+                                <option value="NEXTEL">Nextel</option>
+                                <option value="PERSONAL">Personal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-2 col-md-offset-1 col-md-2">
+                        <div class="form-group">
+                            <label for="telType">Type</label>
+                            <select id="telType" name="telType" class="form-control" data-ng-model="user.personalInfo.telephones[0].telType">
+                                <option value="PERSONAL">Personal</option>
+                                <option value="LABORAL">Business</option>
+                                <option value="CELULAR">Cellular</option>
+                                <option value="ADICIONAL">Additional</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <div class="form-group">
+                            <label for="street">Address Street</label>
+                            <input type="text" id="street" name="street" class="form-control" data-ng-model="user.personalInfo.addresses[0].street" placeholder="Street">
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <div class="col-xs-3 col-md-3">
+                            <div class="form-group">
+                                <label for="numberAddress">Number</label>
+                                <input type="text" id="numberAddress" name="numberAddress" class="form-control" data-ng-model="user.personalInfo.addresses[0].number" placeholder="Number">
+                            </div>
+                        </div>
+                        <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                            <div class="form-group">
+                                <label for="floor">Floor</label>
+                                <input type="text" id="floor" name="floor" class="form-control" data-ng-model="user.personalInfo.addresses[0].floor" placeholder="Floor">
+                            </div>
+                        </div>
+                        <div class="col-xs-offset-1 col-xs-3 col-md-offset-1 col-md-3">
+                            <div class="form-group">
+                                <label for="dep">Department</label>
+                                <input type="text" id="dep" name="dep" class="form-control" data-ng-model="user.personalInfo.addresses[0].dep" placeholder="Department">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" class="form-control" data-ng-model="user.personalInfo.addresses[0].city" placeholder="City">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-2 col-md-2">
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" class="form-control" data-ng-model="user.personalInfo.addresses[0].state" placeholder="State">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-2 col-md-offset-1 col-md-2">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" class="form-control" data-ng-model="user.personalInfo.addresses[0].country" placeholder="Country">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-2 col-md-offset-1 col-md-2">
+                        <div class="form-group">
+                            <label for="postcode">Postcode</label>
+                            <input type="text" id="postcode" name="postcode" class="form-control" data-ng-model="user.personalInfo.addresses[0].postcode" placeholder="Postcode">
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-2 col-md-offset-1 col-md-2">
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select id="type" name="type" class="form-control" data-ng-model="user.personalInfo.telephones[0].addressType">
+                                <option value="PERSONAL">Personal</option>
+                                <option value="LABORAL">Business</option>
+                                <option value="ADICIONAL">Additional</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-left form-group">
+                    <button type="submit" class="btn btn-large btn-primary">Save Profile</button>
+                </div>
+				<div data-ng-show="success" class="text-center text-success">
+					<strong>Profile Saved Successfully</strong>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

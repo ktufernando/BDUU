@@ -1,0 +1,65 @@
+<div data-ng-controller="AuthenticationLoguedController">
+<div class="modal-header">
+    <h3 data-ng-hide="showSignup">Sign In</h3>
+    <h3 data-ng-show="showSignup">Sign Up</h3>
+</div>
+<br>
+<section class="row">
+    <div class="col-xs-offset-1 col-xs-8 col-md-offset-2 col-md-5" data-ng-hide="showSignup">
+        <form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+			<fieldset>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
+					<a href="#" data-ng-click="showSignup=true">Sign up</a>
+				</div>
+                <br>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="col-xs-offset-1 col-xs-8 col-md-offset-2 col-md-5" data-ng-show="showSignup">
+        <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+            <fieldset>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" data-ng-model="user.password" placeholder="Password">
+                </div>
+                <div class="text-center form-group">
+                    <button type="submit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;
+                    <a href="#" data-ng-click="showSignup=false" class="show-signup">Sign in</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
+</div>
